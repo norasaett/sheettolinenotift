@@ -23,6 +23,7 @@ var SheetID = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";   // Google Sheet ID
     var row = data[i];
     var sent = row[5];
     
+    //Create html data when not appear sent word in last row
     if (sent != "sent"&&((startRow + i)==numRows)) {
          
  //Use http://pojo.sodhanalibrary.com/string.html to Convert html to javascript variable
@@ -141,14 +142,16 @@ var SheetID = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";   // Google Sheet ID
   }
 
 
-
+//Prepre Data before sent to htmltoimage api
+//Read api doc from https://docs.htmlcsstoimage.com/ for more info.
 var formData = {
   html: myvar
+  //You can get screenshot website by sent your desire url 
   //url:'https://script.google.com/macros/s/AKfycbwD4GasFDS9SHqLKHKsXX1896khWRpGNykStRz1TsqvWCmXkYGNXfXuazlzIRrohGqj/exec',
   
 };
 
-username = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';  //API KEY FROM htmlcsstoimage.com
+username = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';  //API KEY FROM htmlcsstoimage.com free 50 images per month
 password = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
 
 var options = {
@@ -163,15 +166,13 @@ var res = UrlFetchApp.fetch("https://hcti.io/v1/image", options);
 var dataAll = JSON.parse(res.getContentText());
 Logger.log(dataAll['url']) 
 }
-//for(i in dataAll) {
-//  Logger.log(i + ": " + dataAll[i]);
-//}
-//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////Sent Image from API To line notify Section////////////////////////////////////////
 
  
   var Token1 = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';   Insert your line token
 
-  var message = "ข้อมูลความปลอดภัย ประจำเดือน "+getcurrentmonth()+" ::";
+  var message = "ข้อมูล ประจำเดือน "+getcurrentmonth()+" ::";
   
   if(message!=""){
     if (sent != "sent") {
