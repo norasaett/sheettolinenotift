@@ -1,2 +1,2 @@
-# sheettolinenotift
-Create image from google sheet by htmlcsstoimage API and send to line notify
+# Create Image form Googlesheet data send to line notify
+Create image from App script on google sheet by htmlcsstoimage API(Free 50 images/month) and send image from api to line notify
